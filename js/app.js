@@ -45,7 +45,21 @@ function btnDeleteCustomrOnAction() {
 }
 
 function btnUpdateCustomrOnAction() {
-    alert("update customer");
+    //alert("update customer");
+    let id = document.getElementById("txtid").value
+    let customer = customerList.find(c=> c.id === id);
+
+    if(customer){
+        customer.name = document.getElementById("txtname").value;
+        customer.age = document.getElementById("txtage").value;
+        customer.address = document.getElementById("txtaddress").value;
+
+        localStorage.setItem("customerList", JSON.stringify(customerList));
+        btnLoadTableOnAction();
+
+    }else{
+        alert("Customer Not Found");
+    }
 }
 
 function btnClearStorageOnAction() {
