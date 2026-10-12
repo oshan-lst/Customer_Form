@@ -33,7 +33,15 @@ function btnSearchCustomrOnAction() {
 }
 
 function btnDeleteCustomrOnAction() {
-    alert("delete customer");
+   let id = document.getElementById("txtid").value
+
+   let index = customerList.findIndex(c=> c.id === id);
+
+   if(index!== -1){
+    customerList.splice(index,1);
+    localStorage.setItem("customerList", JSON.stringify(customerList));
+    btnLoadTableOnAction();
+   }
 }
 
 function btnUpdateCustomrOnAction() {
@@ -43,7 +51,7 @@ function btnUpdateCustomrOnAction() {
 function btnClearStorageOnAction() {
     localStorage.clear();
     customerList = [];
-    btnLoadTableOnAction();
+   // btnLoadTableOnAction();
     
 }
 
@@ -65,4 +73,4 @@ function btnLoadTableOnAction() {
     document.getElementById("tblCustomer").innerHTML = tblbdy;
 }
 
-// btnLoadTableOnAction();
+btnLoadTableOnAction();
