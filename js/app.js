@@ -1,4 +1,4 @@
-// ---------------------- CRUD operations in localStorage--------------------
+let customerList = JSON.parse(localStorage.getItem(customerList)) || [];
 
 function btnaddCustomrOnAction() {
     alert("add customer");
@@ -17,9 +17,24 @@ function btnUpdateCustomrOnAction() {
 }
 
 function btnClearStorageOnAction() {
-    alert("clear storage");
+    localStorage.clear();
+    customerList = [];
 }
 
 function btnLoadTableOnAction() {
     alert("load table");
+
+    let tblbdy = "";
+
+    customerList.forEach(customer => {
+        tblbdy += `
+            <tr>
+            <td>${customer.id}</td>
+            <td>${customer.name}</td>
+            <td>${customer.age}</td>
+            <td>${customer.address}</td>
+        </tr>
+        `;
+    });
+    document.getElementById("tblCustomer").innerHTML = tblbdy;
 }
