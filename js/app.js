@@ -1,11 +1,35 @@
-let customerList = JSON.parse(localStorage.getItem(customerList)) || [];
+let customerList = JSON.parse(localStorage.getItem("customerList")) || [];
 
 function btnaddCustomrOnAction() {
-    alert("add customer");
+
+
+    let customer = {
+        id:document.getElementById("txtid").value,
+        name:document.getElementById("txtname").value,
+        age:document.getElementById("txtage").value,
+        address:document.getElementById("txtaddress").value
+    }
+    // console.log(customer);
+    customerList.push(customer);
+    // console.log(customerList);
+    localStorage.setItem("customerList", JSON.stringify(customerList));
+    //btnLoadTableOnAction();
+    
 }
 
 function btnSearchCustomrOnAction() {
-    alert("search customer");
+    let id = document.getElementById("txtid").value
+
+    let customer = customerList.find(c=> c.id === id);
+
+    if(customer){
+        document.getElementById("txtname").value = customer.name;
+        document.getElementById("txtage").value = customer.age;
+        document.getElementById("txtaddress").value = customer.address;
+
+    }else{
+        alert("customer not found");
+    }
 }
 
 function btnDeleteCustomrOnAction() {
@@ -19,10 +43,12 @@ function btnUpdateCustomrOnAction() {
 function btnClearStorageOnAction() {
     localStorage.clear();
     customerList = [];
+    btnLoadTableOnAction();
+    
 }
 
 function btnLoadTableOnAction() {
-    alert("load table");
+    // alert("load table");
 
     let tblbdy = "";
 
@@ -38,3 +64,5 @@ function btnLoadTableOnAction() {
     });
     document.getElementById("tblCustomer").innerHTML = tblbdy;
 }
+
+// btnLoadTableOnAction();
